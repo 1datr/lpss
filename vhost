@@ -1,12 +1,13 @@
 #!/bin/bash
 # Script to add virtual host in apache2
+# tested in Xubuntu
 # ---------- CONSTANTS -----------------
 # apache path
-apache_path="/etc/httpd/"
+apache_path="/etc/apache2/"
 # virtual hosts directories path
 # vhdirpath="/home/anton/htdocs"
-vhdirpath="/var/www/html/htdocs"
-vhconfdir="conf.d"
+vhdirpath="/home/anton/vhosts"
+vhconfdir="sites-available"
 
 myAskYN() 
 {
@@ -27,13 +28,13 @@ RestartServer()
 {
 # restart apache
 echo "Restart apache2"
-sudo service httpd restart
+sudo service apache2 restart
 }
 #control existing virtual hosts directory
 HostDirControl ()
 {
 if [ -d $vhdirpath ]; then
-  echo "Virtual hosts directory exists"
+	echo "Virtual hosts directory exists"
 else
 	echo "Virtual hosts directory not exists"
 	mkdir $vhdirpath
@@ -55,7 +56,7 @@ echo "<VirtualHost *:80>
 		Order allow,deny
 		allow from all
 	</Directory>	
-</VirtualHost>" > "$apache_path$vhconfdir/$1.conf"
+</VirtualHost>" > "$apache_path$vhconfdir/$1"
 echo "Configuration file in '$apache_path$availabledir' created"
 # make virtual host directory id not exists
 if [ -d "$2/$1"]; then
@@ -118,7 +119,14 @@ if [ "$1" == "new" ]; then
 	else
 		echo "You must enter the url of new virtual host"
 	fi
-	
+elif [ "$1" == "add" ]; then
+	echo $1
+	if [ -n $2 ]; then
+		HostDirControl
+		MakeHost $2 $vhdirpath
+	else
+		echo "You must enter the url of new virtual host"
+	fi	
 elif [ "$1" == "drop" ]; then
 	HostDirControl
 	DeleteHost $2
@@ -129,7 +137,7 @@ else
 	echo "vhost v.1.0 
 Virtual hosts manager for Apache2
 Synthax: 
-vhost new <hostname> - create new virtual host with adress <hostname>
+vhost new|add <hostname> - create new virtual host with adress <hostname>
 vhost drop <hostname> - remove virtual host with adress <hostname>
 vhost update - automaticly remove or create virtual host if threre is in a host directory
 (c) magnuz 2013
