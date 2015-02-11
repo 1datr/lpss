@@ -1,0 +1,1 @@
+copy /usr/share/fonts/truetype/msttcorefonts/Arial.ttf /home/anton/.wine/dosdevices/c:/windows/Fonts/Arial.ttf
