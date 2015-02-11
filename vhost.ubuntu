@@ -56,10 +56,10 @@ echo "<VirtualHost *:80>
 		Order allow,deny
 		allow from all
 	</Directory>	
-</VirtualHost>" > "$apache_path$vhconfdir/$1"
+</VirtualHost>" > "$apache_path$vhconfdir/$1.conf"
 echo "Configuration file in '$apache_path$availabledir' created"
 # make virtual host directory id not exists
-if [ -d "$2/$1"]; then
+if [ -d "$2/$1" ]; then
 	echo "Virtual host directory allready exists"	
 else
 	mkdir "$2/$1"	
