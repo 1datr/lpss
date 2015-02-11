@@ -55,6 +55,7 @@ echo "<VirtualHost *:80>
 		AllowOverride All
 		Order allow,deny
 		allow from all
+		Require all granted
 	</Directory>	
 </VirtualHost>" > "$apache_path$vhconfdir/$1.conf"
 echo "Configuration file in '$apache_path$availabledir' created"
@@ -126,6 +127,14 @@ elif [ "$1" == "add" ]; then
 		MakeHost $2 $vhdirpath
 	else
 		echo "You must enter the url of new virtual host"
+	fi
+elif [ "$1" == "create" ]; then
+	echo $1
+	if [ -n $2 ]; then
+		HostDirControl
+		MakeHost $2 $vhdirpath
+	else
+		echo "You must enter the url of new virtual host"
 	fi	
 elif [ "$1" == "drop" ]; then
 	HostDirControl
@@ -137,7 +146,7 @@ else
 	echo "vhost v.1.0 
 Virtual hosts manager for Apache2
 Synthax: 
-vhost new|add <hostname> - create new virtual host with adress <hostname>
+vhost new|add|create <hostname> - create new virtual host with adress <hostname>
 vhost drop <hostname> - remove virtual host with adress <hostname>
 vhost update - automaticly remove or create virtual host if threre is in a host directory
 (c) magnuz 2013
