@@ -1,1 +1,4 @@
 sudo apt-get install timidity-interfaces-extra tuxguitar-alsa tuxguitar-oss tuxguitar-jsa
+# Set in Tuxguitar Settings
+# MIDI seq - TuxGuitar sequencer
+# MIDI port - Gervill
