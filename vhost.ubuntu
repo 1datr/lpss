@@ -6,7 +6,7 @@
 apache_path="/etc/apache2/"
 # virtual hosts directories path
 # vhdirpath="/home/anton/htdocs"
-vhdirpath="/home/anton/vhosts"
+vhdirpath="/$HOME/vhosts"
 vhconfdir="sites-available"
 
 myAskYN() 
@@ -42,6 +42,14 @@ else
 fi
 chmod 777 -R "$vhdirpath"
 }
+# set rights to all folders
+RightsControl()
+{
+	sudo chmod 775 -R  $vhdirpath 
+	sudo chgrp -R www-data $vhdirpath 
+}
+
+
 # Create new virtual host
 MakeHost ()
 {
@@ -135,13 +143,16 @@ elif [ "$1" == "create" ]; then
 		MakeHost $2 $vhdirpath
 	else
 		echo "You must enter the url of new virtual host"
-	fi	
+	fi
+elif [ "$1" == "prepare" ]; then
+	RightsControl	
 elif [ "$1" == "drop" ]; then
 	HostDirControl
 	DeleteHost $2
 elif [ "$1" == "update" ]; then
 	HostDirControl
 	PoolUpdate
+	RightsControl
 else
 	echo "vhost v.1.0 
 Virtual hosts manager for Apache2
@@ -149,6 +160,7 @@ Synthax:
 vhost new|add|create <hostname> - create new virtual host with adress <hostname>
 vhost drop <hostname> - remove virtual host with adress <hostname>
 vhost update - automaticly remove or create virtual host if threre is in a host directory
-(c) magnuz 2013
+vhost prepare - make the necessary rights to all hosts
+(c) magnuz 2015
 "
 fi
