@@ -1,0 +1,3 @@
+# py to gcc exe file wia cython
+cython --embed $1.py -o $1.c
+gcc -o $1 -Wall -Werror $1.c `python-config --includes --ldflags`
