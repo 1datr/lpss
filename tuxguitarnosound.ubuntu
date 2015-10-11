@@ -1,4 +1,4 @@
-sudo apt-get install timidity-interfaces-extra tuxguitar-alsa tuxguitar-oss tuxguitar-jsa
+sudo apt-get install timidity-interfaces-extra tuxguitar-alsa tuxguitar-oss tuxguitar-jsa fluidsynth
 # After it set in Tuxguitar Settings
 # MIDI seq - TuxGuitar sequencer
 # MIDI port - Gervill
