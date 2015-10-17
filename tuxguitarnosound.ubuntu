@@ -3,3 +3,6 @@ sudo apt-get install timidity-interfaces-extra tuxguitar-alsa tuxguitar-oss tuxg
 # MIDI seq - TuxGuitar sequencer
 # MIDI port - Gervill
 # TG Tools => Plugins => Java Sound Api => Configure => usr/share/sounds/sf2 FluidR3_GM.sf2 
+
+
+# http://tylerfrankenstein.com/code/tuxguitar-better-sound-ubuntu-12
