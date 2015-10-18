@@ -6,3 +6,6 @@ sudo apt-get install timidity-interfaces-extra tuxguitar-alsa tuxguitar-oss tuxg
 
 
 # http://tylerfrankenstein.com/code/tuxguitar-better-sound-ubuntu-12
+
+
+timidity -iA -Os
